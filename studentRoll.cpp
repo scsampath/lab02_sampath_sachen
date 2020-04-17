@@ -38,30 +38,16 @@ StudentRoll::StudentRoll(const StudentRoll &orig) {
   if(!orig.head){
     return;
   }
+  head = NULL;
   Node* temp = orig.head;
-  while(temp){
-    Node *newNode = new Node;
-    newNode->s = new Student(temp->s->getName(), temp->s->getPerm());
-    if(!head || !tail){
-      head = tail = newNode;
-    }
-    else {
-      tail = newNode;
-    }
-    newNode = newNode->next;
+  while(temp) {
+    insertAtTail(*temp -> s);
     temp = temp -> next;
   }
-  //   for (Node*i = orig.head; i != NULL; i = i->next){
-  //   iter = new Node;
-  //   iter->s = new Student(i->s->getName(), i->s->getPerm());
-  //   tail = iter;
-  //   iter = iter->next;
-  // }
 }
 
-
 StudentRoll::~StudentRoll() {
-  while(head != NULL){
+  while(head){
       Node *temp = head;
       head = head->next;
       delete temp;
@@ -78,7 +64,17 @@ StudentRoll & StudentRoll::operator =(const StudentRoll &right ) {
 
   // TODO... Here is where there is code missing that you need to 
   // fill in...
-  
+
+  if(this->head){
+    this->~StudentRoll();
+  }
+
+  Node* counter = right.head;
+  while(counter){
+    insertAtTail(*counter-> s);
+    counter = counter -> next;
+  }
+
   // KEEP THE CODE BELOW THIS LINE
   // Overloaded = should end with this line, despite what the textbook says.
   return (*this); 
