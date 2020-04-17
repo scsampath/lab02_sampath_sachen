@@ -35,10 +35,10 @@ std::string StudentRoll::toString() const {
 }
 
 StudentRoll::StudentRoll(const StudentRoll &orig) {
+  head = tail = NULL;
   if(!orig.head){
     return;
   }
-  head = NULL;
   Node* temp = orig.head;
   while(temp) {
     insertAtTail(*temp -> s);
