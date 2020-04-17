@@ -49,7 +49,9 @@ StudentRoll::StudentRoll(const StudentRoll &orig) {
 StudentRoll::~StudentRoll() {
   while(head){
       Node *temp = head;
+      Student *temp2 = temp->s;
       head = head->next;
+      delete temp2;
       delete temp;
   }
 }
