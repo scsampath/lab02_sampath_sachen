@@ -21,7 +21,8 @@ void Student::setPerm(const int permNumber) {
 }
 
 void Student::setName(const char * const name) {
-  delete[] name;
+  delete[] this->name;
+  this->name = NULL;
   this->name = new char[strlen(name)+1];
   strcpy(this->name,name);
 }
@@ -33,7 +34,7 @@ Student::Student(const Student &orig) {
 }
 
 Student::~Student() {
-    delete[] name;
+    delete[] this->name;
     this->perm = 0;
 }
 
