@@ -17,10 +17,11 @@ const char * const Student::getName() const {
 }
 
 void Student::setPerm(const int permNumber) {
-    perm = permNumber;
+  this->perm = permNumber;
 }
 
 void Student::setName(const char * const name) {
+  delete[] name;
   this->name = new char[strlen(name)+1];
   strcpy(this->name,name);
 }
@@ -32,7 +33,7 @@ Student::Student(const Student &orig) {
 }
 
 Student::~Student() {
-    delete name;
+    delete[] name;
 }
 
 Student & Student::operator=(const Student &right) {
@@ -45,11 +46,13 @@ Student & Student::operator=(const Student &right) {
 
   // TODO... Here is where there is code missing that you need to 
   // fill in...
+  if(this->name){
+    delete name;
+  }
+  
   this->name = right.name;
   this->perm = right.perm;
   
-
-
   // KEEP THE CODE BELOW THIS LINE
   // Overloaded = should end with this line, despite what the textbook says.
   return (*this); 
