@@ -8,15 +8,15 @@ StudentRoll::StudentRoll() {
 
 void StudentRoll::insertAtTail(const Student &s) {
     Node* newNode = new Node;
-    newNode -> s = new Student(s);
-    newNode -> next = NULL;
-    if (head == NULL){
-        head = newNode;
+    newNode->s = new Student(s.getName(), s.getPerm());
+    newNode->next = NULL;
+    if(!head || !tail) {
+      head = tail = newNode;
     }
-    if(tail != NULL){
-        tail -> next = newNode;
+    else {
+      tail->next = newNode;
+      tail = newNode;
     }
-    tail = newNode;
 }
 
 std::string StudentRoll::toString() const {
@@ -35,13 +35,30 @@ std::string StudentRoll::toString() const {
 }
 
 StudentRoll::StudentRoll(const StudentRoll &orig) {
-  Node *temp = orig.head;
-  while(temp != NULL){
-      insertAtTail(*temp->s);
-      temp = temp->next;
+  if(!orig.head){
+    return;
   }
-  head = tail = NULL;
+  Node* temp = orig.head;
+  while(temp){
+    Node *newNode = new Node;
+    newNode->s = new Student(temp->s->getName(), temp->s->getPerm());
+    if(!head || !tail){
+      head = tail = newNode;
+    }
+    else {
+      tail = newNode;
+    }
+    newNode = newNode->next;
+    temp = temp -> next;
+  }
+  //   for (Node*i = orig.head; i != NULL; i = i->next){
+  //   iter = new Node;
+  //   iter->s = new Student(i->s->getName(), i->s->getPerm());
+  //   tail = iter;
+  //   iter = iter->next;
+  // }
 }
+
 
 StudentRoll::~StudentRoll() {
   while(head != NULL){
