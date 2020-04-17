@@ -4,8 +4,7 @@
 #include <sstream>
 
 Student::Student(const char * const name, int perm) {
-  this->name = new char[strlen(name)+1];
-  strcpy(this->name,name);
+  this->setName(name);
   this->setPerm(perm);
 }
 
@@ -22,22 +21,20 @@ void Student::setPerm(const int permNumber) {
 }
 
 void Student::setName(const char * const name) {
-  this->~Student();
   this->name = new char[strlen(name)+1];
   strcpy(this->name,name);
 }
 
 
 Student::Student(const Student &orig) {
-  this->name = new char[strlen(name)+1];
-  strcpy(this->name,name);
+  this->setName(orig.name);
   this->setPerm(orig.perm);
 }
 
 Student::~Student() {
-  if (name != NULL) {
-    delete name;
-    name = NULL;
+    if (this->name != NULL) {
+    delete this->name;
+    this->name = NULL;
   }
 }
 
