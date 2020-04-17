@@ -18,9 +18,13 @@ int main() {
 
 
   StudentRoll sr0;
+  cout<<"1"<<endl;
   StudentRoll sr1(sr0);
+  cout<<"2"<<endl;
   sr1.insertAtTail(s1);
+  cout<<"3"<<endl;
   StudentRoll sr2(sr1);
+  cout<<"4"<<endl;
   sr2.insertAtTail(s2);
   StudentRoll sr3;
   sr3.insertAtTail(s1);
